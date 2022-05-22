@@ -3,7 +3,12 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    @posts = Post.all
+    @search_posts_form = SearchPostsForm.new(search_params)
+    @posts = @search_posts_form.search.order(id: :desc)
+  end
+
+  def search
+    @search_form.search
   end
 
   # GET /posts/1 or /posts/1.json
@@ -66,5 +71,9 @@ class PostsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def post_params
       params.require(:post).permit(:title, :body, :status)
+    end
+
+    def search_params
+      params[:q]&.permit(:title, :body, :status)
     end
 end
