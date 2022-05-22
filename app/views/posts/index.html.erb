@@ -1,6 +1,6 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Posts</h1>
+<h1>Posts Page</h1>
 
 <div id="posts">
   <% @posts.each do |post| %>
@@ -15,11 +15,13 @@
 <h1>検索</h1>
 <p>空欄で区切ると複数検索できます</p>
 <%= form_with model: @search_posts_form, url: posts_path, method: :get, scope: :q,local: true do |f| %>
-  <%= f.label :title %>
-  <%= f.search_field :title %>
-  <%= f.label :body %>
-  <%= f.search_field :body %>
+  <%= f.label :title_start %>
+  <%= f.search_field :title_start %>
+  <%= f.label :body_cont %>
+  <%= f.search_field :body_cont %>
   <%= f.label :status %>
-  <%= f.select :status, Post.statuses,{include_blank: "選択してください"} %> 
+  <%= f.select :status, Post.statuses,{include_blank: "選択しない"} %> 
   <%= f.submit "検索！！" %>
 <%end%>
+
+<%= link_to "Back To Top" ,root_path%>

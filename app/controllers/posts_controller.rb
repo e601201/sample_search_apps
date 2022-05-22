@@ -74,6 +74,6 @@ class PostsController < ApplicationController
     end
 
     def search_params
-      params[:q]&.permit(:title, :body, :status)
+      params[:q]&.permit(:title_start, :body_cont, :status)
     end
 end

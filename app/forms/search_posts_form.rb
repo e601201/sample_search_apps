@@ -3,19 +3,19 @@ class SearchPostsForm
   include ActiveModel::Attributes
 
   attribute :status, :integer
-  attribute :title, :string
-  attribute :body, :string
+  attribute :title_start, :string
+  attribute :body_cont, :string
 
   def search
     relation = Post.distinct
     relation = relation.by_status(status) if status.present?
 
-    title_words.each do |word|
-      relation = relation.title_contain(word)
+    title_words.each do |title_word|
+      relation = relation.title_start(title_word)
     end
 
-    body_words.each do |word|
-      relation = relation.body_contain(word)
+    body_words.each do |body_word|
+      relation = relation.body_contain(body_word)
     end
 
     relation
@@ -24,11 +24,11 @@ class SearchPostsForm
   private
 
   def title_words
-    title.present? ? title.split(nil) : []
+    title_start.present? ? title_start.split(nil) : []
   end
 
   def body_words
-    body.present? ? body.split(nil) : []
+    body_cont.present? ? body_cont.split(nil) : []
   end
 
 end
