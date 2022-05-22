@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_20_040746) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_22_075059) do
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.text "body"
@@ -18,6 +18,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_20_040746) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["status"], name: "index_posts_on_status"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name", default: "名無し"
+    t.text "content", default: "説明なし"
+    t.integer "age", default: 20
+    t.integer "sex", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
